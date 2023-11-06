@@ -10,29 +10,18 @@ AFloatingActor::AFloatingActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	LogTextInfo("WE IN THIS BICJ");
-
-	LogTextInfo("WE IN THIS BICJ I DUNNO!!?!?!?");
-
 	USceneComponent* ExistingRootComponent = GetRootComponent();
 	if (!ExistingRootComponent) {
 		VisualMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 		VisualMesh->SetupAttachment(RootComponent);
 
-		LogTextInfo("WE IN THIS BICH 2");
-
 		static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Game/StarterContent/Shapes/Shape_Cube.Shape_Cube"));
 
 		if (CubeVisualAsset.Succeeded()) {
 			
-			LogTextInfo("WE IN THIS BICJ 3");
-
 			VisualMesh->SetStaticMesh(CubeVisualAsset.Object);
 			VisualMesh->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
 		}
-	}
-	else {
-		LogTextInfo("SOMETHING HAS GONE COMPLETELY FUCKIN WRONG FAM");
 	}
 }
 
