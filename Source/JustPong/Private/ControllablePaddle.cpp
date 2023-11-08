@@ -3,6 +3,8 @@
 
 #include "ControllablePaddle.h"
 #include "EnhancedInputSubsystems.h"
+#include "ControlMapping.h"
+#include "EnhancedInputComponent.h"
 
 // Sets default values
 AControllablePaddle::AControllablePaddle()
@@ -35,5 +37,15 @@ void AControllablePaddle::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 	enhanced_inp_subsys->ClearAllMappings();
 	enhanced_inp_subsys->AddMappingContext(InputMapping, 0);
+
+	UEnhancedInputComponent* enhanced_input = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+
+	enhanced_input->BindAction(InputActions->InputMovePaddle, ETriggerEvent::Triggered, this, &AControllablePaddle::MovePaddle);
 }
 
+void AControllablePaddle::MovePaddle(const FInputActionValue& value) {
+	const float move_value = value.Get<float>();
+	FVector3d currentPos = GetActorLocation();
+	FVector movement_direction(move_value, 0.0f, 0.0f);
+	AddMovementInput(movement_direction, 20.0f);
+}

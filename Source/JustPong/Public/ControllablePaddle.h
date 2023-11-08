@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "InputActionValue.h"
 #include "ControllablePaddle.generated.h"
-
 UCLASS()
 class JUSTPONG_API AControllablePaddle : public ACharacter
 {
@@ -20,6 +20,10 @@ protected:
 	virtual void BeginPlay() override;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputMappingContext* InputMapping;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UControlMapping* InputActions;
+	UPROPERTY(VisibleAnywhere)
+	float MoveSpeed = 20.0f;
 
 public:	
 	// Called every frame
@@ -28,4 +32,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void MovePaddle(const FInputActionValue& value);
 };
+
