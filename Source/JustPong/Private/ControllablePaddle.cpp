@@ -29,6 +29,11 @@ void AControllablePaddle::Tick(float DeltaTime)
 // Called to bind functionality to input
 void AControllablePaddle::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
+	APlayerController* PC = Cast<APlayerController>(GetController());
 
+	UEnhancedInputLocalPlayerSubsystem* enhanced_inp_subsys = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer());
+
+	enhanced_inp_subsys->ClearAllMappings();
+	enhanced_inp_subsys->AddMappingContext(InputMapping, 0);
 }
 
