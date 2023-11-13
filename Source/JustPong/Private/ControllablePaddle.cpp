@@ -5,6 +5,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "ControlMapping.h"
 #include "EnhancedInputComponent.h"
+#include "JustPong/JustPong.h"
 
 // Sets default values
 AControllablePaddle::AControllablePaddle()
@@ -29,7 +30,7 @@ void AControllablePaddle::Tick(float DeltaTime)
 }
 
 // Called to bind functionality to input
-void AControllablePaddle::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AControllablePaddle::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	APlayerController* PC = Cast<APlayerController>(GetController());
 
@@ -41,6 +42,8 @@ void AControllablePaddle::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	UEnhancedInputComponent* enhanced_input = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 
 	enhanced_input->BindAction(InputActions->InputMovePaddle, ETriggerEvent::Triggered, this, &AControllablePaddle::MovePaddle);
+	LogTextInfo("I am moving!");
+
 }
 
 void AControllablePaddle::MovePaddle(const FInputActionValue& value) {
@@ -48,4 +51,6 @@ void AControllablePaddle::MovePaddle(const FInputActionValue& value) {
 	FVector3d currentPos = GetActorLocation();
 	FVector movement_direction(move_value, 0.0f, 0.0f);
 	AddMovementInput(movement_direction, 20.0f);
+	
+
 }
