@@ -42,15 +42,12 @@ void AControllablePaddle::SetupPlayerInputComponent(class UInputComponent* Playe
 	UEnhancedInputComponent* enhanced_input = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 
 	enhanced_input->BindAction(InputActions->InputMovePaddle, ETriggerEvent::Triggered, this, &AControllablePaddle::MovePaddle);
-	LogTextInfo("I am moving!");
 
 }
 
 void AControllablePaddle::MovePaddle(const FInputActionValue& value) {
 	const float move_value = value.Get<float>();
 	FVector3d currentPos = GetActorLocation();
-	FVector movement_direction(move_value, 0.0f, 0.0f);
-	AddMovementInput(movement_direction, 20.0f);
-	
-
+	FVector movement_direction(0.0f, move_value, 0.0f);
+	AddMovementInput(movement_direction, MoveSpeed);
 }

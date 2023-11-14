@@ -22,8 +22,8 @@ protected:
 	class UInputMappingContext* InputMapping;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UControlMapping* InputActions;
-	UPROPERTY(VisibleAnywhere)
-	float MoveSpeed = 20.0f;
+	UPROPERTY(EditDefaultsOnly)
+	float MoveSpeed;
 
 public:	
 	// Called every frame
