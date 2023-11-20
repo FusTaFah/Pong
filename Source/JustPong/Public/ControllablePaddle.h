@@ -24,6 +24,8 @@ protected:
 	class UControlMapping* InputActions;
 	UPROPERTY(EditDefaultsOnly)
 	float MoveSpeed;
+	/*UPROPERTY(EditDefaultsOnly)
+	class UCameraComponent* CameraComp;*/
 
 public:	
 	// Called every frame
